@@ -10,7 +10,6 @@ namespace Chess
 
         public bool IsSafe()
         {
-            // no two queens on the same row
             var countZeroes = Board.Count(n => n == 0);
             var countDistinct = Board.Distinct().Count();
 
