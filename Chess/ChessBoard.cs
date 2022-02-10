@@ -16,7 +16,6 @@ namespace Chess
 			if (Board.Length != countDistinct + (countZeroes > 1 ? countZeroes - 1 : 0))
                 return false;
 
-            // no two queens on the same diagonal
             for (int i = 1; i <= 8; i++)
                 for (int j = i+1; j <= 8; j++)
 				{
@@ -35,7 +34,29 @@ namespace Chess
 
         public static bool PlaceQueens(ChessBoard board = null, int column = 0)
         {
-            throw new NotImplementedException();
+            board = board ?? new ChessBoard();
+
+            for (int row = 1; row <= 8; row++)
+			{
+                board.Board[column] = row;
+
+				if (board.IsSafe())
+				{
+                    if (column == 7)
+					{
+                        return true;
+					}
+					else
+					{
+                        var newBoard = new ChessBoard(board);
+                        if (PlaceQueens(newBoard, column + 1))
+                            return true;
+                        else
+                            continue;
+					}
+				}
+			}
+            return false;
         }
 
         public static bool PlaceQueens(List<ChessBoard> solutions, ChessBoard board = null, int column = 0)
