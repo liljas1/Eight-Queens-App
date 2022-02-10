@@ -17,9 +17,20 @@ namespace Chess
                 return false;
 
             // no two queens on the same diagonal
-
-
-            throw new NotImplementedException();
+            for (int i = 1; i <= 8; i++)
+                for (int j = i+1; j <= 8; j++)
+				{
+					if (Board[i - 1] != 0 && Board[j - 1] !=  0)
+					{
+                        var dX = Math.Abs(i-j);
+                        var dY = Math.Abs(Board[i - 1] - Board[j - 1]);
+					    if (dX == dY)
+					    {
+                            return false;
+					    }
+					}
+				}
+            return true;
         }
 
         public static bool PlaceQueens(ChessBoard board = null, int column = 0)
